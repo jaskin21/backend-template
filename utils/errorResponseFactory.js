@@ -1,4 +1,4 @@
-const responseFactory = require('./responseFactory.js');
+const { responseFactory } = require('./responseFactory.js');
 
 const errorResponseFactory = (
   response,
@@ -8,8 +8,8 @@ const errorResponseFactory = (
 ) => {
   return responseFactory(response, statusCode, {
     error: errorMessage,
-    ...otherDetails,
+    ...(otherDetails && { ...otherDetails }), // Use spread syntax only if otherDetails is provided
   });
 };
 
-module.exports = errorResponseFactory;
+module.exports = { errorResponseFactory };
